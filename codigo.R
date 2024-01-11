@@ -75,7 +75,7 @@ tensorflow::tf$random$set_seed(semente)
 model <- keras_model_sequential(name = "simple_model") %>% 
   
   # Convolution Layer
-  layer_conv_2d(filters = 16,
+  layer_conv_2d(filters = 64,
                 kernel_size = c(3,3),
                 padding = "same",
                 activation = "linear",
@@ -89,7 +89,7 @@ model <- keras_model_sequential(name = "simple_model") %>%
   layer_flatten() %>% 
   
   # Dense Layer
-  layer_dense(units = 16,
+  layer_dense(units = 64,
               activation = "linear") %>% 
   
   # Output Layer
@@ -110,7 +110,7 @@ history <- model %>%
     
     # training epochs
     steps_per_epoch = as.integer(train_samples / batch_size), 
-    epochs =15, 
+    epochs =50, 
     
     # validation data
     validation_data = val_image_array_gen,
@@ -151,9 +151,9 @@ confusionMatrix(as.factor(pred_test),
 )
 
 model%>%
-  save_model_hdf5("modelo_bom.hdf5")
+  save_model_hdf5("modelo_bom2.hdf5")
 
-model2=load_model_hdf5("modelo_bom.hdf5")
+model=load_model_hdf5("modelo_bom2.hdf5")
 
 imagem=load.image("teste_resized.jpg")
 
